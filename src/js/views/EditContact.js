@@ -3,23 +3,26 @@ import { Context } from "../store/appContext";
 
 import { Link } from "react-router-dom";
 
-export const AddContact = () => {
+export const EditContact = () => {
 	const { store, actions } = useContext(Context);
-
+	// use id in order to find this specific contact from store.contacts
+	// to get id from props.match.params.id
+	// use find method to match params.id
 	// for edit > pull contact info from store using id
-	const [newContact, setNewContact] = useState({
-		full_name: "",
+	const [editedContact, setEditedContact] = useState({
+		full_name: "", // contact.full_name (this will come from newly created contact variable from find method), apply to all 4 below
 		email: "",
+		id: "",
 		phone: "",
 		address: ""
 	});
 
-	const handleChange = event => setNewContact({ ...newContact, [event.target.name]: event.target.value });
+	const handleChange = event => setEditedContact({ ...editedContact, [event.target.name]: event.target.value });
 
 	return (
 		<div className="container">
 			<div>
-				<h1 className="text-center mt-5">Add a new contact</h1>
+				<h1 className="text-center mt-5">Edit a contact</h1>
 				<form>
 					<div className="form-group">
 						<label>Full Name</label>
@@ -27,7 +30,7 @@ export const AddContact = () => {
 							type="text"
 							name="full_name"
 							onChange={handleChange}
-							value={newContact.full_name}
+							value={editedContact.full_name}
 							className="form-control"
 							placeholder="Full Name"
 						/>
@@ -39,7 +42,7 @@ export const AddContact = () => {
 							type="email"
 							name="email"
 							onChange={handleChange}
-							value={newContact.email}
+							value={editedContact.email}
 							className="form-control"
 							placeholder="Enter email"
 						/>
@@ -50,7 +53,7 @@ export const AddContact = () => {
 							type="phone"
 							name="phone"
 							onChange={handleChange}
-							value={newContact.phone}
+							value={editedContact.phone}
 							className="form-control"
 							placeholder="Enter phone"
 						/>
@@ -61,14 +64,14 @@ export const AddContact = () => {
 							type="text"
 							name="address"
 							onChange={handleChange}
-							value={newContact.address}
+							value={editedContact.address}
 							className="form-control"
 							placeholder="Enter address"
 						/>
 					</div>
 					<button
 						onClick={() => {
-							actions.addContact(newContact);
+							actions.editContact(editedContact);
 						}}
 						type="button"
 						className="btn btn-primary form-control">
