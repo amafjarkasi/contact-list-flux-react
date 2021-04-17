@@ -2,7 +2,6 @@ const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			contacts: []
-			//Your data structures, A.K.A Entities
 		},
 		actions: {
 			deleteContact: id => {
